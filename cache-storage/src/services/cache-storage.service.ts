@@ -1,9 +1,11 @@
+export type Topic = string | number;
+
 export abstract class CacheStorageService {
   abstract setValue(
     key: string,
     value: Record<string, any>,
     params?: {
-      topic?: string;
+      topic?: Topic;
       expireInSec?: number;
     },
   ): Promise<{
@@ -12,7 +14,7 @@ export abstract class CacheStorageService {
     expDate?: string;
   }>;
 
-  abstract getValue<T>(key: string, topic?: string): Promise<null | T>;
+  abstract getValue<T>(key: string, topic?: Topic): Promise<null | T>;
 
-  abstract deleteValue(key: string): Promise<boolean>;
+  abstract deleteValue(key: string, topic?: Topic): Promise<boolean>;
 }

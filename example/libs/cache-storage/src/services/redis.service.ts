@@ -5,7 +5,7 @@ import {
   CacheStorageModuleOptions,
   CACHE_STORAGE_OPTIONS_PROVIDER_NAME,
 } from '../cache-storage.types';
-import { CacheStorageService } from './cache-storage.service';
+import { CacheStorageService, Topic } from './cache-storage.service';
 
 @Injectable()
 export class RedisCacheStorageService implements CacheStorageService {
@@ -22,7 +22,7 @@ export class RedisCacheStorageService implements CacheStorageService {
     key: string,
     value: Record<string, any>,
     params?: {
-      topic?: string;
+      topic?: Topic;
       expireInSec?: number;
     },
   ) {
@@ -37,7 +37,7 @@ export class RedisCacheStorageService implements CacheStorageService {
     return { key: keyWithTopic, value };
   }
 
-  async getValue<T>(key: string, topic?: string): Promise<null | T> {
+  async getValue<T>(key: string, topic?: Topic): Promise<null | T> {
     const keyWithTopic = topic ? `${topic}__${key}` : key;
 
     const value = await this.client.get(keyWithTopic);
@@ -48,7 +48,7 @@ export class RedisCacheStorageService implements CacheStorageService {
     }
   }
 
-  async deleteValue(key: string, topic?: string): Promise<boolean> {
+  async deleteValue(key: string, topic?: Topic): Promise<boolean> {
     const keyWithTopic = topic ? `${topic}__${key}` : key;
 
     const res = await this.client.del(keyWithTopic);

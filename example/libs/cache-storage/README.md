@@ -8,7 +8,7 @@ setValue(
   key: string,
   value: Record<string, any>,
   params?: {
-    topic?: string;
+    topic?: string | number;
     expireInSec?: number;
   }
 ): Promise<{
@@ -18,10 +18,10 @@ setValue(
 }>
 ```
 ```typescript
-async getValue<T>(key: string, topic?: string): Promise<null | T>
+async getValue<T>(key: string, topic?: string | number): Promise<null | T>
 ```
 ```typescript
-async deleteValue(key: string, topic?: string): Promise<boolean>
+async deleteValue(key: string, topic?: string | number): Promise<boolean>
 ```
 
 ### Example
