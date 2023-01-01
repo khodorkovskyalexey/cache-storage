@@ -48,8 +48,10 @@ export class RedisCacheStorageService implements CacheStorageService {
     }
   }
 
-  async deleteValue(key: string): Promise<boolean> {
-    const res = await this.client.del(key);
+  async deleteValue(key: string, topic?: string): Promise<boolean> {
+    const keyWithTopic = topic ? `${topic}__${key}` : key;
+
+    const res = await this.client.del(keyWithTopic);
     return Boolean(res);
   }
 

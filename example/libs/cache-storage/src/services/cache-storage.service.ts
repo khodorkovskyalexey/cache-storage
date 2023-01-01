@@ -14,5 +14,5 @@ export abstract class CacheStorageService {
 
   abstract getValue<T>(key: string, topic?: string): Promise<null | T>;
 
-  abstract deleteValue(key: string): Promise<boolean>;
+  abstract deleteValue(key: string, topic?: string): Promise<boolean>;
 }

@@ -21,7 +21,7 @@ setValue(
 async getValue<T>(key: string, topic?: string): Promise<null | T>
 ```
 ```typescript
-async deleteValue(key: string): Promise<boolean>
+async deleteValue(key: string, topic?: string): Promise<boolean>
 ```
 
 ### Example
